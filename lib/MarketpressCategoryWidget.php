@@ -160,9 +160,11 @@ class MarketpressCategoryWidget extends WP_Widget {
 	    $children = get_term_children( $cat->term_id, 'product_category' );
 	    $ancestors = get_ancestors($cat->term_id, 'product_category');
 
+	    // Get the common ids between ancestors and current IDs
+	    $array_intersect = array_intersect($ancestors, $cat_ids);
 
 	    // Only display if the current category has children and none of the categories being displayed are an ancestor of the current category
-	    if(!empty($children) && empty(array_intersect($ancestors, $cat_ids))){									    			
+	    if(!empty($children) && empty($array_intersect)){									    			
 		// List children categories of current ID
 		$this->list_categories(array('child_of' => $cat->term_id, 'title_li' => '<a href="'.get_term_link($cat->term_id, 'product_category').'">'.$cat->name.'</a>'));
 
