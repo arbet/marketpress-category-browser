@@ -39,6 +39,5 @@ require_once (MCB_PATH.'/lib/MarketpressCategoryWidget.php');
 // Require main class
 require_once (MCB_PATH.'/lib/MarketpressCategoryBrowser.php'); 
 
-
 // Initialize marketpress category browser object
 $category_browser = new MarketpressCategoryBrowser();

@@ -21,6 +21,10 @@ Have you ever wanted to display your product categories like eBay or Amazon does
 * On product category pages, the widget will list current category and any of its children
 * On non-Marketpress pages, the widget will display all the site top level categories
 
+**Shortcode Usage**
+
+Use the shortcode _[marketpress_category_widget width=\'150\' height=\'150\']_ to insert a widget on any page, with the thumbnail image size on top of size 150x150
+
 == Installation ==
 1. Install the plugin as usual from the wordpress repository or by manually uploading it to your site
 2. Go to Appearance->Widget, and look for \"Marketpress Category Widget\"
