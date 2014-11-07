@@ -23,7 +23,7 @@ Have you ever wanted to display your product categories like eBay or Amazon does
 
 **Shortcode Usage**
 
-Use the shortcode _[marketpress_category_widget width=\'150\' height=\'150\']_ to insert a widget on any page, with the thumbnail image size on top of size 150x150
+Use the shortcode _[marketpress_category_widget width='150' height='150']_ to insert a widget on any page, with the thumbnail image size on top of size 150x150
 
 == Installation ==
 1. Install the plugin as usual from the wordpress repository or by manually uploading it to your site
