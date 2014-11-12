@@ -8,6 +8,9 @@ class MarketpressCategoryWidget extends WP_Widget {
 
     // Holds the widget instance array
     private $instance = false;
+    
+    // Hide empty categories flag
+    private $hide_empty = false;
 
     /**
      * Sets up the widgets name etc
@@ -33,6 +36,9 @@ class MarketpressCategoryWidget extends WP_Widget {
 	// Initialize instance object
 	$this->instance = $instance;
 
+	// Set hide empty categories flag
+	$this->hide_empty = is_null($instance['hide_empty']) ? 0 : 1;
+;	
 	// Display image on top of listing
 	$this->display_image();
 
@@ -82,7 +88,8 @@ class MarketpressCategoryWidget extends WP_Widget {
 	// Use default width
 	else {
 	    $width = '150';
-	}	    
+	}
+	
 	?>
 	<p>
 	    <!-- Image height field -->
@@ -94,6 +101,11 @@ class MarketpressCategoryWidget extends WP_Widget {
 	    <label for="<?php echo $this->get_field_id( 'width' ); ?>"><?php _e( 'Widget Image Width' ); ?></label> 
 	    <input class="widefat" id="<?php echo $this->get_field_id( 'width' ); ?>" name="<?php echo $this->get_field_name( 'width' ); ?>" type="text" value="<?php echo esc_attr( $width ); ?>">		
 	</p>
+	<p>
+	    <!-- Hide Empty Categories -->
+	    <label for="<?php echo $this->get_field_id( 'hide_empty' ); ?>"><?php _e( 'Hide Empty Categories? ' ); ?></label> 
+	    <input class="widefat" id="<?php echo $this->get_field_id( 'hide_empty' ); ?>" name="<?php echo $this->get_field_name( 'hide_empty' ); ?>" type="checkbox" value="" <?php checked(isset($instance['hide_empty']) ? 1: 0); ?> />		
+	</p>	
 	<?php 
 
     }
@@ -113,7 +125,9 @@ class MarketpressCategoryWidget extends WP_Widget {
 	$instance['width'] = ( ! empty( $new_instance['width'] ) ) ? strip_tags( $new_instance['width'] ) : '';
 
 	// Set featured image height based on user entered options
-	$instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';	    
+	$instance['height'] = ( ! empty( $new_instance['height'] ) ) ? strip_tags( $new_instance['height'] ) : '';	
+	
+	$instance['hide_empty'] = $new_instance['hide_empty'];
 
 	// Return values to be saved
 	return $instance;	    
@@ -123,7 +137,7 @@ class MarketpressCategoryWidget extends WP_Widget {
 
 	// Set default arguments
 	$default_arguments = array('taxonomy' => 'product_category',
-				'hide_empty' => 0 ,
+				'hide_empty' => $this->hide_empty ,
 				'show_option_all ' => "All Products",
 				'show_count' => true,
 				'depth' => 2,
@@ -215,7 +229,7 @@ class MarketpressCategoryWidget extends WP_Widget {
     private function generic_view(){
 
 	wp_list_categories(array('taxonomy' => 'product_category',
-			    'hide_empty' => 0,
+			    'hide_empty' => $this->hide_empty,
 			    'show_count' => true
 			));		    
     }

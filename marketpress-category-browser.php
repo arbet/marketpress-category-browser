@@ -3,7 +3,7 @@
  * Plugin Name: Marketpress Category Browser
  * Plugin URI: http://thoughtengineer.com/
  * Description:  Displays list of categories in a widget or a shortcode
- * Version: 1.1
+ * Version: 1.1.1
  * Author: Samer Bechara
  * Author URI: http://thoughtengineer.com/
  * Text Domain: marketpress-category-browser
