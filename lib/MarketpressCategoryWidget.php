@@ -164,28 +164,32 @@ class MarketpressCategoryWidget extends WP_Widget {
 	// Get product categories
 	$categories = get_the_terms(get_the_ID(), 'product_category' );
 
-	// Get category IDS
-	$cat_ids = array_keys($categories);
+	// Only show category children if a category was actually found
+	if($categories !== FALSE){
+	 
+	    // Get category IDS
+	    $cat_ids = array_keys($categories);
 
-	// Display tree for each of the categories the product belongs to 
-	foreach($categories as $cat){		
+	    // Display tree for each of the categories the product belongs to 
+	    foreach($categories as $cat){		
 
-	    // Get the current category's children and ancestors
-	    $children = get_term_children( $cat->term_id, 'product_category' );
-	    $ancestors = get_ancestors($cat->term_id, 'product_category');
+		// Get the current category's children and ancestors
+		$children = get_term_children( $cat->term_id, 'product_category' );
+		$ancestors = get_ancestors($cat->term_id, 'product_category');
 
-	    // Get the common ids between ancestors and current IDs
-	    $array_intersect = array_intersect($ancestors, $cat_ids);
+		// Get the common ids between ancestors and current IDs
+		$array_intersect = array_intersect($ancestors, $cat_ids);
 
-	    // Only display if the current category has children and none of the categories being displayed are an ancestor of the current category
-	    if(!empty($children) && empty($array_intersect)){									    			
-		// List children categories of current ID
-		$this->list_categories(array('child_of' => $cat->term_id, 'title_li' => '<a href="'.get_term_link($cat->term_id, 'product_category').'">'.$cat->name.'</a>'));
+		// Only display if the current category has children and none of the categories being displayed are an ancestor of the current category
+		if(!empty($children) && empty($array_intersect)){									    			
+		    // List children categories of current ID
+		    $this->list_categories(array('child_of' => $cat->term_id, 'title_li' => '<a href="'.get_term_link($cat->term_id, 'product_category').'">'.$cat->name.'</a>'));
 
-		// Hide siblings since a tree is being displayed
-		$show_siblings = false;			
-	    }
+		    // Hide siblings since a tree is being displayed
+		    $show_siblings = false;			
+		}
 
+	    }	    
 	}
 
 
@@ -325,8 +329,16 @@ class MarketpressCategoryWidget extends WP_Widget {
 	// Get current category
 	$cat = $wp_query->query_vars['product_category'];
 
-	// Return the category image
-	return $this->get_cat_image($cat);
+	// Get category image
+	$image = $this->get_cat_image($cat);
+	
+	// Image found
+	if( $image !== FALSE){
+	    return $image;
+	}
+	
+	// not found
+	return false;
 
     }	
     
