@@ -3,7 +3,7 @@ Contributors: arbet01
 Tags: marketpress, widget, shortcode
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ Use the shortcode _[marketpress_category_widget width='150' height='150']_ to in
 2. Go to Appearance->Widget, and look for \"Marketpress Category Widget\"
 
 == Changelog ==
+
+= 1.1.2 = 
+* Removed warning which showed in debug mode
 
 = 1.1.1 =
 * Added option to hide empty categories
